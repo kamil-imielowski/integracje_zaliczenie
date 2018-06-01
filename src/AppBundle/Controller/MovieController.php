@@ -144,10 +144,13 @@ class MovieController extends Controller
 
         $movies = array();
 
-        $aboveLogin = $em->getRepository(Settings::class)->findOneBy(['valKey' => 'above_ytPlayer']);
-        $underLogin = $em->getRepository(Settings::class)->findOneBy(['valKey' => 'under_ytPlayer']);
+        //$aboveLogin = $em->getRepository(Settings::class)->findOneBy(['valKey' => 'above_ytPlayer']);
+        //$underLogin = $em->getRepository(Settings::class)->findOneBy(['valKey' => 'under_ytPlayer']);
 
-        $channel = $em->getRepository(Channel::class)->findOneBy(["name" => $aboveLogin->getValue()]);
+        $channels = $em->getRepository(Channel::class)->findAll();
+        shuffle ( $channels );
+        $channel = $channels[0];
+        $channelUnder = $channels[1];
 
         if(!empty($channel)) {
             $resultmovies = $em->getRepository(Movie::class)->getLastMoviesChannel(5, $channel->getId());
@@ -156,7 +159,6 @@ class MovieController extends Controller
             $movies['above'] = null;
         }
 
-        $channelUnder = $em->getRepository(Channel::class)->findOneBy(["name" => $underLogin->getValue()]);
         if(!empty($channelUnder)) {
             $resultmovies = $em->getRepository(Movie::class)->getLastMoviesChannel(5, $channelUnder->getId());
             $movies['under'] = $resultmovies;

@@ -78,15 +78,6 @@ easy_admin:
                   - { property: 'description', type_options:{required: false}}
 #                  - { property: 'movies', label: 'Movies', type: 'collection', type_options: { entry_type: 'AppBundle\Form\MovieType', by_reference: false } }
 
-        Advertising:
-            class: AppBundle\Entity\Advertising
-            form:
-              fields:
-                - {property: 'name', label: 'Nazwa'}
-                - {property: 'place', label: 'Miejsce wyświetlania', type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', type_options: {choices: {miejsce1: 1, miejsce2: 2, miejsce3: 3, miejsce4: 4}}}
-                - {property: 'code', label: 'Kod'}
-                - {property: 'expireAt', label: 'Ważne do:'}
-
         Movie:
             class: AppBundle\Entity\Movie
             list:
@@ -97,16 +88,6 @@ easy_admin:
                 - 'link'
                 - { property: 'description', type_options:{empty_data: ""}}
                 - { property: 'channel', label: 'Channel', type: 'Symfony\Bridge\Doctrine\Form\Type\EntityType', type_options: {class: AppBundle\Entity\Channel, choice_label: 'name', required: false, empty_data: null}}
-
-        Settings:
-          class: AppBundle\Entity\Settings
-          list:
-              fields: ['description', 'value']
-          disabled_actions: ['new', 'delete']
-          form:
-            fields:
-                - 'description'
-                - 'value'
 
     site_name: 'Panel administracyjny'
     design:
